@@ -93,6 +93,11 @@ def main():
         result_label.config(text="변환 결과가 여기에 표시됩니다.")
         force_entry.focus_set()
 
+    def swap_units():
+        current_from_unit = from_unit.get()
+        from_unit.set(to_unit.get())
+        to_unit.set(current_from_unit)
+
     button_frame = tk.Frame(window)
     button_frame.pack()
     tk.Button(button_frame, text="변환", width=10, command=convert).grid(
@@ -103,6 +108,9 @@ def main():
     )
     tk.Button(button_frame, text="종료", width=10, command=window.destroy).grid(
         row=0, column=2, padx=4
+    )
+    tk.Button(button_frame, text="단위 교환", width=10, command=swap_units).grid(
+        row=0, column=3, padx=4
     )
 
     force_entry.bind("<Return>", lambda event: convert())
