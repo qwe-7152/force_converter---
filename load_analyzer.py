@@ -15,8 +15,10 @@ REFERENCE_STRESS_MPA = 6.0
 EXPECTED_FIELDS = ["time_s", "force_N"]
 
 
-def read_measurements() -> tuple[list[tuple[float, float]], list[tuple[int, str, str]]]:
-    with CSV_PATH.open(newline="", encoding="utf-8-sig") as csv_file:
+def read_measurements(
+    csv_path: Path = CSV_PATH,
+) -> tuple[list[tuple[float, float]], list[tuple[int, str, str]]]:
+    with csv_path.open(newline="", encoding="utf-8-sig") as csv_file:
         reader = csv.DictReader(csv_file)
         if reader.fieldnames != EXPECTED_FIELDS:
             raise ValueError(
